@@ -1,7 +1,7 @@
 <template>
   <div class="search-box">
     <input type="search" v-model="inputText" placeholder="검색어 입력" />
-    <button @click="triggerSearch">검색</button>
+    <button @click="triggerSearch" class="btn btn-info">검색</button>
   </div>
 </template>
 
@@ -47,9 +47,13 @@ function triggerSearch() {
 
 .search-box input {
   padding: 5px 10px;
+  border-radius: 10px;
+  border: 1px solid gray;
 }
 
 .search-box button {
-  margin: 0;
+  border-radius: 10px;
+  margin-left: 5px;
+  font-weight: bold;
 }
 </style>

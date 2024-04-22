@@ -21,9 +21,7 @@ const debouncedSearch = _.debounce((newValue) => {
   const findMember = props.members.filter((member) =>
     member.name.toLowerCase().includes(newValue.toLowerCase()),
   );
-  if (findMember.length > 0) {
-    console.log(findMember);
-  } else {
+  if (findMember.length === 0) {
     Swal.fire({
       title: "검색 결과 없음",
       text: "해당 이름을 가진 회원이 없습니다.",
@@ -35,6 +33,7 @@ const debouncedSearch = _.debounce((newValue) => {
 // 버튼 클릭시 검색 실행
 function triggerSearch() {
   debouncedSearch(inputText.value);
+  inputText.value = ""; // 검색 후 값 초기화
 }
 </script>
 

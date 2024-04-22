@@ -35,6 +35,7 @@
         </tr>
       </tbody>
     </table>
+    <SearchBar :members="members" />
   </div>
 </template>
 
@@ -43,6 +44,7 @@ import { useRouter } from "vue-router";
 import { onMounted, ref } from "vue";
 import axios from "axios";
 import MemberView from "@/views/MemberView.vue";
+import SearchBar from "@/components/SearchBar.vue";
 
 const router = useRouter();
 const members = ref([]);

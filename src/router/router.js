@@ -1,19 +1,24 @@
 import { createRouter, createWebHistory } from "vue-router";
 import MemberCreate from "@/views/MemberCreate.vue";
 import HomeView from "@/views/HomeView.vue";
+import MemberView from "@/views/MemberView.vue";
 
 const routes = [
   {
-    path: "/", // 메인 페이지, 아마 회원 목록을 표시
+    path: "/",
     name: "HomeView",
     component: HomeView,
   },
   {
-    path: "/create", // 생성자 추가 페이지
+    path: "/create",
     name: "MemberCreate",
     component: MemberCreate,
   },
-  // 기타 경로...
+  {
+    path: "/view/:id",
+    name: "MemberView",
+    component: MemberView,
+  },
 ];
 
 const router = createRouter({

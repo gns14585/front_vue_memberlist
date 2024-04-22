@@ -79,8 +79,12 @@ function handleAddClick() {
       Swal.fire("회원이 생성되었습니다.");
       moveToList();
     })
-    .catch((error) => {
-      console.error("요청이 실패했습니다.", error);
+    .catch(() => {
+      Swal.fire({
+        icon: "error",
+        title: "문제가 발생하였습니다.",
+        text: "잠시 후 다시 시도해주시기 바랍니다.",
+      });
     });
 }
 </script>

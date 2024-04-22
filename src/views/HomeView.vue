@@ -8,7 +8,7 @@
         생성자 추가
       </button>
     </div>
-    <table class="table container">
+    <table class="table table-hover container hover_m">
       <thead>
         <tr>
           <th scope="col">번호</th>
@@ -21,7 +21,11 @@
       </thead>
 
       <tbody>
-        <tr v-for="row in members" :key="members.id">
+        <tr
+          v-for="row in members"
+          :key="members.id"
+          @click="viewMember(row.id)"
+        >
           <th>{{ row.id }}</th>
           <td>{{ row.name }}</td>
           <td>{{ row.email }}</td>
@@ -38,6 +42,7 @@
 import { useRouter } from "vue-router";
 import { onMounted, ref } from "vue";
 import axios from "axios";
+import MemberView from "@/views/MemberView.vue";
 
 const router = useRouter();
 const members = ref([]);
@@ -52,6 +57,15 @@ function moveToCreate() {
     name: "MemberCreate",
   });
 }
+
+function viewMember(memberId) {
+  router.push({
+    name: "MemberView",
+    params: {
+      id: memberId,
+    },
+  });
+}
 </script>
 
 <style scoped>
@@ -60,6 +74,10 @@ function moveToCreate() {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.hover_m:hover {
+  cursor: pointer;
 }
 
 .button_m {

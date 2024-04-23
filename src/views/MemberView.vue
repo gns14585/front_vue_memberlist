@@ -108,8 +108,8 @@ function handleClickDelete() {
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
-    confirmButtonText: "네, 삭제하겠습니다.",
-    cancelButtonText: "아니요, 취소하겠습니다.",
+    confirmButtonText: "네.",
+    cancelButtonText: "아니요.",
   }).then((res) => {
     if (res.isConfirmed) {
       axios

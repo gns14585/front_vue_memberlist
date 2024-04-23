@@ -21,10 +21,10 @@ const routes = [
     component: MemberView, // 멤버 상세 페이지
   },
   {
-    path: "/view/:id/update",
+    path: "/view/update/:id",
     name: "MemberUpdate",
     component: MemberUpdate, // 멤버 수정 페이지
-  }
+  },
 ];
 
 const router = createRouter({

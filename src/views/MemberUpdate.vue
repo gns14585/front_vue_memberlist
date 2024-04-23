@@ -6,7 +6,7 @@
     <div class="content_sub shadow-lg">
       <div>
         <p class="text_m">이름</p>
-        <input type="text" class="input_n" v-model="member.name" />
+        <input type="text" class="input_n" v-model="member.name" readonly />
       </div>
 
       <div>
@@ -100,15 +100,15 @@ function handleClickUpdate() {
   }).then((res) => {
     if (res.isConfirmed) {
       axios
-        .put(`/api/member/update/${member.value.id}`)
+        .put(`/api/member/update/${member.value.id}`, member.value)
         .then(() => {
-          Swal.file({
+          Swal.fire({
             title: "수정 완료",
             text: "회원 정보가 수정 되었습니다.",
             icon: "success",
           });
           router.push({
-            name: "MemberView",
+            name: "HomeView",
           });
         })
         .catch(() => {

@@ -6,29 +6,36 @@
     <div class="content_sub shadow-lg">
       <div>
         <p class="text_m">이름</p>
-        <input type="text" class="input_n" v-model="member.name" />
+        <input type="text" class="input_n" v-model="member.name" readonly />
       </div>
 
       <div>
         <p class="text_m">이메일</p>
-        <input type="text" class="input_n" v-model="member.email" />
+        <input type="text" class="input_n" v-model="member.email" readonly />
       </div>
 
       <div>
         <p class="text_m">연락처</p>
-        <input type="text" class="input_n" v-model="member.phone" />
+        <input type="text" class="input_n" v-model="member.phone" readonly />
       </div>
 
       <div class="flex-container">
         <label class="text_m">성별 :</label>
         <div class="radio-group">
-          <input type="radio" id="male" value="true" v-model="member.gender" />
+          <input
+            type="radio"
+            id="male"
+            value="true"
+            v-model="member.gender"
+            readonly
+          />
           <label for="male" style="margin-left: -7px">남성</label>
           <input
             type="radio"
             id="female"
             value="false"
             v-model="member.gender"
+            readonly
           />
           <label for="female" style="margin-left: -7px">여성</label>
         </div>
@@ -36,7 +43,7 @@
 
       <div>
         <p class="text_m">생년월일</p>
-        <input type="text" class="input_n" v-model="member.birthday" />
+        <input type="text" class="input_n" v-model="member.birthday" readonly />
       </div>
 
       <div class="mt-5 d-flex justify-content-center gap-4">

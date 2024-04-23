@@ -3,10 +3,12 @@
     <div class="container_m">
       <h1>회원 목록</h1>
     </div>
-    <div class="button_m">
-      <button class="btn btn-primary mt-5" @click="moveToCreate">
-        생성자 추가
-      </button>
+    <div class="button_container">
+      <div class="button_container2">
+        <button class="btn btn-primary mt-5 button_m" @click="moveToCreate">
+          생성자 추가
+        </button>
+      </div>
     </div>
     <table class="table table-hover container hover_m">
       <thead>
@@ -22,7 +24,7 @@
 
       <tbody>
         <tr
-          v-for="row in members"
+          v-for="row in paginatedMembers"
           :key="members.id"
           @click="viewMember(row.id)"
         >
@@ -36,6 +38,30 @@
       </tbody>
     </table>
     <SearchBar :members="members" />
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" :class="{ disabled: currentPage === 1 }">
+          <button class="page-link" @click="changePage(currentPage - 1)">
+            이전
+          </button>
+        </li>
+        <li
+          class="page-item"
+          v-for="page in totalPages"
+          :key="page"
+          :class="{ active: currentPage === page }"
+        >
+          <button class="page-link" @click="changePage(page)">
+            {{ page }}
+          </button>
+        </li>
+        <li class="page-item" :class="{ disabled: currentPage === totalPages }">
+          <button class="page-link" @click="changePage(currentPage + 1)">
+            다음
+          </button>
+        </li>
+      </ul>
+    </nav>
   </div>
 </template>
 
@@ -45,6 +71,7 @@ import { onMounted, ref } from "vue";
 import axios from "axios";
 import MemberView from "@/views/MemberView.vue";
 import SearchBar from "@/components/SearchBar.vue";
+import { computed } from "vue";
 
 const router = useRouter();
 const members = ref([]);
@@ -68,6 +95,28 @@ function viewMember(memberId) {
     },
   });
 }
+
+const currentPage = ref(1); // 현재 페이지
+const pageSize = 3; // 페이지 당 항목 수
+
+const totalPages = computed(() => {
+  return Math.ceil(members.value.length / pageSize);
+});
+
+// 현재 페이지에 맞는 멤버 데이터를 계산합니다.
+const paginatedMembers = computed(() => {
+  const start = (currentPage.value - 1) * pageSize;
+  const end = start + pageSize;
+  return members.value.slice(start, end);
+});
+
+// 페이지 번호를 변경하는 함수
+function changePage(page) {
+  if (page < 1 || page > totalPages.value) {
+    return;
+  }
+  currentPage.value = page;
+}
 </script>
 
 <style scoped>
@@ -78,8 +127,23 @@ function viewMember(memberId) {
   align-items: center;
 }
 
+.hover_m {
+  border: 1px solid #eee;
+}
+
 .hover_m:hover {
   cursor: pointer;
+}
+
+.button_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button_container2 {
+  width: 80%;
+  margin-bottom: 20px;
 }
 
 .button_m {

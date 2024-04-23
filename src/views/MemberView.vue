@@ -177,8 +177,9 @@ function handleClickDelete() {
 
 .input_n {
   width: 100%;
+
   border-radius: 10px;
   border: 1px solid #eee;
-  padding: 5px;
+  padding: 10px;
 }
 </style>

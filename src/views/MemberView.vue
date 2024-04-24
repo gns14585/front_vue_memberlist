@@ -27,7 +27,7 @@
             id="male"
             value="true"
             v-model="member.gender"
-            readonly
+            disabled
           />
           <label for="male" style="margin-left: -7px">남성</label>
           <input
@@ -35,7 +35,7 @@
             id="female"
             value="false"
             v-model="member.gender"
-            readonly
+            disabled
           />
           <label for="female" style="margin-left: -7px">여성</label>
         </div>

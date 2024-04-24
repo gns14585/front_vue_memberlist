@@ -7,32 +7,37 @@
     <div class="content_sub shadow-lg">
       <div>
         <p class="text_m">이름</p>
-        <input type="text" class="input_n" v-model="name" />
+        <input type="text" class="input_n" v-model="member.name" />
       </div>
 
       <div>
         <p class="text_m">이메일</p>
-        <input type="text" class="input_n" v-model="email" />
+        <input type="text" class="input_n" v-model="member.email" />
       </div>
 
       <div>
         <p class="text_m">연락처</p>
-        <input type="text" class="input_n" v-model="phone" />
+        <input type="text" class="input_n" v-model="member.phone" />
       </div>
 
       <div class="flex-container">
         <label class="text_m">성별 :</label>
         <div class="radio-group">
-          <input type="radio" id="male" value="true" v-model="gender" />
+          <input type="radio" id="male" value="true" v-model="member.gender" />
           <label for="male" style="margin-left: -7px">남성</label>
-          <input type="radio" id="female" value="false" v-model="gender" />
+          <input
+            type="radio"
+            id="female"
+            value="false"
+            v-model="member.gender"
+          />
           <label for="female" style="margin-left: -7px">여성</label>
         </div>
       </div>
 
       <div>
         <p class="text_m">생년월일</p>
-        <input type="text" class="input_n" v-model="birthday" />
+        <input type="text" class="input_n" v-model="member.birthday" />
       </div>
 
       <div class="mt-5 d-flex justify-content-center gap-4">
@@ -53,11 +58,13 @@ import { ref } from "vue";
 import Swal from "sweetalert2";
 
 const router = useRouter();
-let name = ref("");
-let email = ref("");
-let phone = ref("");
-let gender = ref(true);
-let birthday = ref("");
+const member = ref({
+  name: "",
+  email: "",
+  phone: "",
+  gender: true,
+  birthday: "",
+});
 
 function moveToList() {
   router.push({
@@ -66,16 +73,9 @@ function moveToList() {
 }
 
 function handleAddClick() {
-  console.log("저장버튼");
   axios
-    .post("/api/member/add", {
-      name: name.value,
-      email: email.value,
-      phone: phone.value,
-      gender: gender.value,
-      birthday: birthday.value,
-    })
-    .then((response) => {
+    .post("/api/member/add", member.value)
+    .then(() => {
       Swal.fire("회원이 생성되었습니다.");
       moveToList();
     })

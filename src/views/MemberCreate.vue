@@ -8,16 +8,19 @@
       <div>
         <p class="text_m">이름</p>
         <input type="text" class="input_n" v-model="member.name" />
+        <p v-if="!member.name" class="alert-text">이름을 입력해야 합니다.</p>
       </div>
 
       <div>
         <p class="text_m">이메일</p>
         <input type="text" class="input_n" v-model="member.email" />
+        <p v-if="!member.email" class="alert-text">이메일을 입력해야 합니다.</p>
       </div>
 
       <div>
         <p class="text_m">연락처</p>
         <input type="text" class="input_n" v-model="member.phone" />
+        <p v-if="!member.phone" class="alert-text">연락처를 입력해야 합니다.</p>
       </div>
 
       <div class="flex-container">
@@ -41,7 +44,11 @@
       </div>
 
       <div class="mt-5 d-flex justify-content-center gap-4">
-        <button class="btn btn-primary w-25 shadow-lg" @click="handleAddClick">
+        <button
+          class="btn btn-primary w-25 shadow-lg"
+          @click="handleAddClick"
+          :disabled="!member.name || !member.email || !member.phone"
+        >
           저장
         </button>
         <button class="btn btn-danger w-25" @click="moveToList">취소</button>
@@ -73,6 +80,10 @@ function moveToList() {
 }
 
 function handleAddClick() {
+  if (member.name === "") {
+    console.log("사용자 이름을 입력해주세요");
+    return;
+  }
   axios
     .post("/api/member/add", member.value)
     .then(() => {
@@ -133,5 +144,10 @@ function handleAddClick() {
   border-radius: 10px;
   border: 1px solid #eee;
   padding: 5px;
+}
+
+.alert-text {
+  color: red;
+  font-size: 0.8em;
 }
 </style>

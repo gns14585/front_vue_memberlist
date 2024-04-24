@@ -22,13 +22,7 @@
       <div class="flex-container">
         <label class="text_m">성별 :</label>
         <div class="radio-group">
-          <input
-            type="radio"
-            id="male"
-            value="true"
-            v-model="member.gender"
-            disabled
-          />
+          <input type="radio" id="male" value="true" v-model="member.gender" />
           <label for="male" style="margin-left: -7px">남성</label>
           <input
             type="radio"
